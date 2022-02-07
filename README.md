@@ -20,6 +20,10 @@ npm start
 npm run test
 ```
 
+## Tech Obstacle(s) That We Overcame
+
+- Fetching data from the .csv file. Initially we tried to fetch it from the internet in real time but was blocked by CORS policy. Then it was a matter of finding the right library to parse the data. There were some trial and error and found Papa Parse to be easy to implement with great documentation.
+
 ## Stretch Goals
 
 Ensure our app is widely accessible to a broad demographic of users:
