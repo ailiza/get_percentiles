@@ -13,12 +13,13 @@ function App({ defaultCompanies, defaultScoreRecords }) {
       const scoreRecordsCsv = await fetch('/score-records.csv');
       const scoreRecordsText = await scoreRecordsCsv.text();
       const scoreRecordsData = Papa.parse(scoreRecordsText, { header: true });
+      
       setScoreRecords(scoreRecordsData);
-      // console.log(scoreRecordsData)
+
       const companiesCsv = await fetch('/companies.csv');
       const companiesText = await companiesCsv.text();
       const companiesData = Papa.parse(companiesText, { header: true });
-      // console.log(companiesData)
+
       setCompanies(companiesData);
 
     };
@@ -38,17 +39,16 @@ function App({ defaultCompanies, defaultScoreRecords }) {
     const candidate = scoreRecords.data.find(c => c.candidate_id === candidateId) || {};
     const sameTitleCandidates = scoreRecords.data.filter(c => c.title === candidate.title);
     const similarCompanyIds = getSimilarCompanies(candidate.company_id);
-    // console.log("similarCompanyIds", similarCompanyIds)
+
     const similarCompanyCandidates = sameTitleCandidates.filter(c => similarCompanyIds.includes(c.company_id));
     const codeRank = similarCompanyCandidates.sort((a,b) => a.coding_score - b.coding_score);
-
-    // console.log(codeRank)
     const codeIdx = codeRank.indexOf(candidate) + 1;
     const codePercentile = (codeIdx / codeRank.length) * 100;
 
     const communicationRank = similarCompanyCandidates.sort((a,b) => a.communication_score - b.communication_score);
     const communicationIdx = communicationRank.indexOf(candidate) + 1;
     const communicationPercentile = (communicationIdx / communicationRank.length) * 100;
+    
     return [codePercentile, communicationPercentile];
   }
 

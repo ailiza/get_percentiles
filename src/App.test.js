@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import App from "./App";
 
-test("renders correct coding percentile", async () => {
+test("renders correct coding percentile for user 890", async () => {
   render(
     <App
       defaultScoreRecords={{
