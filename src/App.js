@@ -41,13 +41,11 @@ function App({ defaultCompanies, defaultScoreRecords }) {
     const similarCompanyIds = getSimilarCompanies(candidate.company_id);
 
     const similarCompanyCandidates = sameTitleCandidates.filter(c => similarCompanyIds.includes(c.company_id));
-    const codeRank = similarCompanyCandidates.sort((a,b) => a.coding_score - b.coding_score);
-    const codeIdx = codeRank.indexOf(candidate) + 1;
-    const codePercentile = (codeIdx / codeRank.length) * 100;
+    const codeIdx = similarCompanyCandidates.reduce((acc, c) => acc + (+c.coding_score < +candidate.coding_score), 0) + 1;
+    const codePercentile = (codeIdx / similarCompanyCandidates.length) * 100;
 
-    const communicationRank = similarCompanyCandidates.sort((a,b) => a.communication_score - b.communication_score);
-    const communicationIdx = communicationRank.indexOf(candidate) + 1;
-    const communicationPercentile = (communicationIdx / communicationRank.length) * 100;
+    const communicationIdx = similarCompanyCandidates.reduce((acc, c) => acc + (+c.communication_score < +candidate.communication_score), 0) + 1;
+    const communicationPercentile = (communicationIdx / similarCompanyCandidates.length) * 100;
     
     return [codePercentile, communicationPercentile];
   }
