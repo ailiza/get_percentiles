@@ -1,4 +1,4 @@
-# GetPercentiles by Annie Ilizarov, Henry Xie & Simple Fractal, LLC.
+# GetPercentiles by Annie Ilizarov
 
 ## Introduction
 We created a React app for benchmarking a software engineer's coding and communication skills against engineers that work at similar companies and with the same title (e.g., Junior Engineer)
